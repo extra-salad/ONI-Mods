@@ -1,0 +1,4 @@
+.vscode
+Player.log.lnk
+**/obj
+**/*.autosave.scml
