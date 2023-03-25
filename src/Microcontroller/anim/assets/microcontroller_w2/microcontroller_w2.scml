@@ -2,7 +2,7 @@
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
     <folder id="0">
         <file id="0" name="ui_0.png" width="142" height="122" pivot_x="0" pivot_y="1"/>
-        <file id="1" name="place_0.png" width="264" height="118" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="place_0.png" width="236" height="264" pivot_x="0" pivot_y="1"/>
         <file id="2" name="panel_0.png" width="236" height="264" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="microcontroller_w2">
@@ -62,7 +62,7 @@
             </mainline>
             <timeline id="0" name="place_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="1" x="44.411765" y="198" angle="270" scale_x="0.75" scale_y="0.75"/>
+                    <object folder="0" file="1" x="-90" y="198" angle="0" scale_x="0.75" scale_y="0.75"/>
                 </key>
             </timeline>
         </animation>
