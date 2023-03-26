@@ -45,16 +45,16 @@ function main([ input1, input2, input3, input4 ]) {
 
 		protected override void OnPrefabInit() {
 			Subscribe((int) GameHashes.LogicEvent, LogicEventHandler);
-			Subscribe((int) GameHashes.PowerStatusChanged, PowerStatusChangeHandler);
+			Subscribe((int) GameHashes.OperationalChanged, OperationalChangeHandler);
 		}
 
 		protected override void OnCleanUp() {
 			base.OnCleanUp();
 			Unsubscribe((int) GameHashes.LogicEvent, LogicEventHandler);
-			Unsubscribe((int) GameHashes.PowerStatusChanged, PowerStatusChangeHandler);
+			Unsubscribe((int) GameHashes.OperationalChanged, OperationalChangeHandler);
 		}
 
-		private void PowerStatusChangeHandler(Object data) {
+		private void OperationalChangeHandler(Object data) {
 			this.ExecuteMain();
 		}
 
@@ -102,9 +102,14 @@ function main([ input1, input2, input3, input4 ]) {
 			if (this.isScriptBroken)
 				return;
 
-			if (!this.operational.isActiveAndEnabled) {
+			if (!this.operational.IsOperational) {
 				foreach (var port in this.logicPorts.outputPortInfo)
 					this.logicPorts.SendSignal(port.id, 0);
+
+				if (!this.operational.enabled) // TODO figure out how to show disabled message when it's disabled
+					this.GetComponent<AttachedMicrocontrollerScripting>()?.microcontrollerScripting?.SetWarningInfo("Microcontroller is disabled");
+				else this.GetComponent<AttachedMicrocontrollerScripting>()?.microcontrollerScripting?.SetWarningInfo("Microcontroller is not powered");
+
 				return;
 			}
 

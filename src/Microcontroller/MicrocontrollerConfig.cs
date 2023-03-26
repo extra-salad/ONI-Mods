@@ -164,7 +164,6 @@ namespace Microcontroller {
 		public static void DoPostConfigureComplete(GameObject go) {
 			go.AddOrGetDef<PoweredController.Def>();
 			go.AddOrGet<Microcontroller>();
-			go.AddOrGet<LogicOperationalController>().unNetworkedValue = 0;
 		}
 	}
 }
