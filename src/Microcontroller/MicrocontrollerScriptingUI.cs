@@ -36,29 +36,33 @@ namespace Microcontroller {
 			// 	}
 			// )
 			.AddChild(
+				// TODO figure out scrolling issues
+				// TODO figure out text alignment issues
 				// new PScrollPane("Scripting Scroll Pane") {
 				// 	ScrollHorizontal = true,
 				// 	ScrollVertical = true,
+				// 	TrackSize = 10,
 				// 	FlexSize = Vector2.one,
-
-				// 	Child =
-					new PTextArea("Scripting TextArea") {
-						LineCount = 15,
-						Text = "",
-						MinWidth = 500,
-						OnTextChanged = (go, text) => {
-							text = text.Replace("\r", "");
-							this.lastTextValue = text;
-							Debug.Log("[ TextArea ] [ OnTextChanged ] " + (go != null ? "OK" : "null") + " [ Text ] " + text);
-							if (this.currentMicrocontroller == null || text == null)
-								return;
-							this.currentMicrocontroller.script = text;
-						}
-					}.AddOnRealize(go => {
-						this.scriptTextArea = go.GetComponentInChildren<TMPro.TMP_InputField>();
-						this.scriptTextArea.onFocusSelectAll = false;
-						this.RefreshTextArea();
-					})
+				// 	Child = (
+						new PTextArea("Scripting TextArea") {
+							LineCount = 15,
+							Text = "",
+							MinWidth = 500,
+							MaxLength = 65536,
+							OnTextChanged = (go, text) => {
+								text = text.Replace("\r", "");
+								this.lastTextValue = text;
+								Debug.Log("[ TextArea ] [ OnTextChanged ] " + (go != null ? "OK" : "null") + " [ Text ] " + text);
+								if (this.currentMicrocontroller == null || text == null)
+									return;
+								this.currentMicrocontroller.script = text;
+							}
+						}.AddOnRealize(go => {
+							this.scriptTextArea = go.GetComponentInChildren<TMPro.TMP_InputField>();
+							this.scriptTextArea.onFocusSelectAll = false;
+							this.RefreshTextArea();
+						})
+				// 	)
 				// }
 			).AddChild(
 				new PPanel("Scripting Panel") {
@@ -108,6 +112,10 @@ namespace Microcontroller {
 
 		public void SetValidInfo(string validText) {
 			this.SetInfo(validText, Color.green);
+		}
+
+		public void SetWarningInfo(string validText) {
+			this.SetInfo(validText, Color.yellow);
 		}
 
 		public void SetErrorInfo(string errorText) {

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using STRINGS;
 using TUNING;
-using BUILDINGS = TUNING.BUILDINGS;
 using UnityEngine;
 
 namespace Microcontroller {
@@ -141,7 +139,7 @@ namespace Microcontroller {
 			for (int i = 0; i < numberOfPorts; i++) {
 				inputPorts.Add(LogicPorts.Port.RibbonInputPort(
 					(HashedString) $"MC_W{numberOfPorts}_I{i}", new CellOffset(portCellOffset + i, 1),
-					UI.LOGIC_PORTS.CONTROL_OPERATIONAL, PortInOn, null, false, true
+					STRINGS.UI.LOGIC_PORTS.INPUT_PORTS, PortInOn, null, false, true
 				));
 			}
 
@@ -154,7 +152,7 @@ namespace Microcontroller {
 			for (int i = 0; i < numberOfPorts; i++) {
 				outputPorts.Add(LogicPorts.Port.RibbonOutputPort(
 					(HashedString) $"MC_W{numberOfPorts}_O{i}", new CellOffset(portCellOffset + i, 0),
-					UI.LOGIC_PORTS.CONTROL_OPERATIONAL, PortOutOn, null, false, true
+					STRINGS.UI.LOGIC_PORTS.OUTPUT_PORTS, PortOutOn, null, false, true
 				));
 			}
 

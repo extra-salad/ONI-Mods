@@ -7,6 +7,8 @@ namespace Microcontroller {
 
 	[SerializationConfig(MemberSerialization.OptIn)]
 	public class Microcontroller : KMonoBehaviour, ISaveLoadable {
+		private static readonly int MAXIMUM_SCRIPT_EXECUTION_TIME_MS = 100;
+
 		[Serialize]
 		public string script = "";
 
