@@ -77,13 +77,19 @@ function main([ input1, input2, input3, input4 ]) {
 
 		public void CompileScript() {
 			this.jsEngine.Dispose();
-			this.jsEngine = new Jint.Engine();
+			this.jsEngine = new Jint.Engine(options => {
+				options.TimeoutInterval(TimeSpan.FromMilliseconds(MAXIMUM_SCRIPT_EXECUTION_TIME_MS));
+			});
 
 			try {
 				this.jsEngine.Execute(this.script);
 			} catch (Exception exception) {
-				Debug.Log(exception.Message);
 				string message = exception is Jint.Runtime.JavaScriptException ? (exception as Jint.Runtime.JavaScriptException).GetJavaScriptErrorString() : exception.Message;
+				Debug.Log(message);
+
+				if (message == "The operation has timed out.")
+					message += $" Maximum script execution time is {MAXIMUM_SCRIPT_EXECUTION_TIME_MS}ms.";
+
 				this.SetScriptAsBroken(message);
 				return;
 			}
